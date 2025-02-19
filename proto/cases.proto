@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package cases;
+
+service CasesService {
+  rpc CreateCase (CreateCaseRequest) returns (CaseResponse);
+  rpc GetCase (GetCaseRequest) returns (CaseResponse);
+  rpc UpdateCase (UpdateCaseRequest) returns (CaseResponse);
+  rpc DeleteCase (DeleteCaseRequest) returns (DeleteResponse);
+  rpc GetCasesByUserId (GetCasesByUserIdRequest) returns (CasesListResponse);
+}
+
+message Case {
+  string id = 1;
+  string userId = 2;
+  string title = 3;
+  string description = 4;
+  string status = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+}
+
+message CreateCaseRequest {
+  string userId = 1;
+  string title = 2;
+  string description = 3;
+  string status = 4;
+}
+
+message GetCaseRequest {
+  string id = 1;
+}
+
+message UpdateCaseRequest {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string status = 4;
+}
+
+message DeleteCaseRequest {
+  string id = 1;
+}
+
+message GetCasesByUserIdRequest {
+  string userId = 1;
+}
+
+message CaseResponse {
+  Case cases = 1;
+}
+
+message CasesListResponse {
+  repeated Case cases = 1;
+}
+
+message DeleteResponse {
+  bool success = 1;
+}

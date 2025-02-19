@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package documents;
+
+service DocumentService {
+  rpc UploadDocument(UploadDocumentRequest) returns (DocumentResponse);
+  rpc GetDocument(GetDocumentRequest) returns (DocumentResponse);
+  rpc ListDocuments(Empty) returns (ListDocumentsResponse);
+  rpc DeleteDocument(DeleteDoucment) returns (DeleteResponse);
+}
+
+message UploadDocumentRequest {
+  string caseId = 1;
+  string filename = 2;
+  string fileUrl = 3;
+}
+
+message Empty {}
+
+message GetDocumentRequest {
+  string id = 1;
+}
+
+
+message DeleteDoucment {
+  string id = 1;
+}
+
+message DeleteResponse {
+  bool success = 1;
+}
+
+
+message DocumentResponse {
+  string id = 1;
+  string caseId = 2;
+  string filename = 3;
+  string fileUrl = 4;
+  string uploadedAt = 5;
+}
+
+message ListDocumentsResponse {
+  repeated DocumentResponse documents = 1;
+}
